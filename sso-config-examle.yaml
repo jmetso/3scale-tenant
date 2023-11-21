@@ -1,0 +1,18 @@
+admin:
+  realm: "<realm-name>"
+  auth-server-url: "https://<sso-host>/auth"
+  ssl-required: "external"
+  resource: "<client-name>"
+  credentials:
+    id: "<client-id>"
+    secret: "<client-secret>"
+  confidential-port": 0
+dev:
+  realm: "<realm-name>"
+  auth-server-url: "https://<sso-host>/auth"
+  ssl-required: "external"
+  resource: "<client-name>"
+  credentials:
+    id: "<client-id>"
+    secret: "<client-secret>"
+  confidential-port: 0
