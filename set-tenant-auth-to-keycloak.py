@@ -32,19 +32,21 @@ def main():
     print('Tenant base url: '+tenant_base_url)
     sso_config = pkg.common.read_yaml_file(file='sso-config-' + tenant_name + '.yaml')
 
-    pkg.auth.set_admin_portal_authentication_as_keycloak(tenant_token=tenant_token, 
-                                                         tenant_base_url=tenant_base_url, 
-                                                         client_id=str(sso_config['admin']['credentials']['id']), 
-                                                         client_secret=str(sso_config['admin']['credentials']['secret']), 
-                                                         site_url=str(sso_config['admin']['auth-server-url']) + '/realms/' + str(sso_config['admin']['realm']), 
-                                                         tenant_name=tenant_name)
+    if sso_config['admin']['enabled']:
+        pkg.auth.set_admin_portal_authentication_as_keycloak(tenant_token=tenant_token, 
+                                                             tenant_base_url=tenant_base_url, 
+                                                             client_id=str(sso_config['admin']['credentials']['id']), 
+                                                             client_secret=str(sso_config['admin']['credentials']['secret']), 
+                                                             site_url=str(sso_config['admin']['auth-server-url']) + '/realms/' + str(sso_config['admin']['realm']), 
+                                                             tenant_name=tenant_name)
     
-    pkg.auth.set_developer_portal_authentication_as_keycloak(tenant_token=tenant_token, 
-                                                         tenant_base_url=tenant_base_url, 
-                                                         client_id=str(sso_config['dev']['credentials']['id']), 
-                                                         client_secret=str(sso_config['dev']['credentials']['secret']), 
-                                                         site_url=str(sso_config['dev']['auth-server-url']) + '/realms/' + str(sso_config['dev']['realm']), 
-                                                         tenant_name=tenant_name)
+    if sso_config['dev']['enabled']:
+        pkg.auth.set_developer_portal_authentication_as_keycloak(tenant_token=tenant_token, 
+                                                             tenant_base_url=tenant_base_url, 
+                                                             client_id=str(sso_config['dev']['credentials']['id']), 
+                                                             client_secret=str(sso_config['dev']['credentials']['secret']), 
+                                                             site_url=str(sso_config['dev']['auth-server-url']) + '/realms/' + str(sso_config['dev']['realm']), 
+                                                             tenant_name=tenant_name)
 
 
 main()
