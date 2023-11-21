@@ -24,13 +24,12 @@ def main():
     else:
         tenant = pkg.common.read_yaml_file(file='tenant.yaml')
 
-    tenant_name = str(tenant['metadata']['name'])
+    tenant_name = str(tenant['spec']['organizationName'])
     print('Tenant name: '+tenant_name)
     tenant_creds = pkg.common.read_yaml_file(file='tenant-secret-' + tenant_name + '.yaml')
-    print('Token: '+str(tenant_creds['stringData']['token']))
-    tenant_token = str(base64.b64decode(str(tenant_creds['stringData']['token'])).decode('UTF-8')).strip()
-    print('Tenant token: '+tenant_token)
-    tenant_base_url = 'https://' + tenant_name + str(tenant['spec']['systemMasterUrl'])[14:] + '/admin/api'
+    tenant_token = str(base64.b64decode(str(tenant_creds['data']['token'])).decode('UTF-8')).strip()
+    tenant_base_url = 'https://' + tenant_name + '-admin' + str(tenant['spec']['systemMasterUrl'])[14:] + '/admin/api'
+    print('Tenant base url: '+tenant_base_url)
     sso_config = pkg.common.read_yaml_file(file='sso-config-' + tenant_name + '.yaml')
 
     pkg.auth.set_admin_portal_authentication_as_keycloak(tenant_token=tenant_token, 
@@ -39,6 +38,7 @@ def main():
                                                          client_secret=str(sso_config['admin']['credentials']['secret']), 
                                                          site_url=str(sso_config['admin']['auth-server-url']) + '/realms/' + str(sso_config['admin']['realm']), 
                                                          tenant_name=tenant_name)
+    
     pkg.auth.set_developer_portal_authentication_as_keycloak(tenant_token=tenant_token, 
                                                          tenant_base_url=tenant_base_url, 
                                                          client_id=str(sso_config['dev']['credentials']['id']), 
