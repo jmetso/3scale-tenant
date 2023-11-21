@@ -6,7 +6,7 @@ spec:
   username: admin
   systemMasterUrl: https://master.example.com
   email: admin@example.com
-  organizationName: Example.com
+  organizationName: example
   masterCredentialsRef:
     name: system-seed
   passwordCredentialsRef:
