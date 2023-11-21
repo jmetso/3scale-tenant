@@ -1,4 +1,5 @@
 admin:
+  enabled: true
   realm: "<realm-name>"
   auth-server-url: "https://<sso-host>/auth"
   ssl-required: "external"
@@ -8,6 +9,7 @@ admin:
     secret: "<client-secret>"
   confidential-port": 0
 dev:
+  enabled: true
   realm: "<realm-name>"
   auth-server-url: "https://<sso-host>/auth"
   ssl-required: "external"
