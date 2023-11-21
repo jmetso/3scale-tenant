@@ -7,7 +7,7 @@ Creates a Keycloak authentication configuration for an existing 3scale tenant. T
 Works using the standard 3scale Operator CRs where possible. Reads secret data and sso configs based on the organizationName specified in the tenant CR. All data is aasumed to be as a local file. This script can't pull info from OpenShift directly.
 
 Example of linking of data:
-A *tenant.yaml* defines 'example' as _organizationName_ -> script reads tenant-secret-*example*.yaml to load tenant access secrets and sso-config-*example*.yaml to read keycloak details.
+A **tenant.yaml** defines 'example' as _organizationName_ -> script reads tenant-secret-**example**.yaml to load tenant access secrets and sso-config-**example**.yaml to read keycloak details.
 
 Example tenant definition:
 ````
